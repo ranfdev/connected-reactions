@@ -1,0 +1,126 @@
+<html>
+  <body>
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="description" content="This is a turn based online game in which the purpose is to 'eat' the enemy color,
+      by exploding the atoms of your color.">
+    </head>
+    <style>
+body {
+  margin: 0;
+  overflow: hidden;
+}
+table {
+  height: 100%;
+  width: 100%;
+  table-layout: fixed;
+  background: red;
+}
+table td {
+  height: 10vh;
+  text-align: center;
+  background: white;
+}
+.circle {
+  float: left;
+  width: 20px;
+  height: 20px;
+  display: block;
+  background-color: red;
+  border-radius: 50%;
+  margin: 2%;
+}
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+.page {
+  overflow-y: scroll;
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  background: white;
+  z-index: 99;
+}
+input {
+  margin-bottom: 10px;
+}
+button {
+  padding: 10px 20px;
+  background: red;
+  color: white;
+  border: 0px;
+  border-radius: 4px;
+  box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.2);
+  margin-bottom: 20px;
+}
+.ripple {
+  width: 16vw;
+  height: 16vw;
+  position: absolute;
+  pointer-events: none;
+  opacity: 0;
+}
+    </style>
+    <span class="ripple"></span>
+
+    <div class="page" id="ui">
+    <div class="container">
+      <h1>Connected reactions</h1>
+      <details>
+        <summary>Description</summary>
+        This is a turn based online game in which the purpose is to "eat" the enemy color,
+        by exploding the atoms of your color. 
+      </details>
+      <details>
+        <summary>Rules</summary>
+        You have a grid where you can place some protons.
+        Your protons have a unique color.
+        You can add more protons to a cell, until the cell explodes.
+        When the cell explodes, the protons will expand 1 in the upper cell,
+        1 in the bottom cell, 1 in the right cell, and 1 in the left cell.
+        A cell explodes when:
+        the protons are more than 1 and are in one of the corners.
+        the protons are more than 2 and touch one of the borders.
+        the protons are more than 3 and are somewhere else.
+      </details>
+
+      <hr>
+
+
+      <div hidden id="waitingUi">
+        <h1>Waiting host to start</h1>
+      </div>
+      <div id="onlineUi">
+        <h3>Online</h3>
+        <i>Metadata of every game played online is saved on a public server</i>
+        <p>Share to play online </p>
+        <span id="url">Url</span>
+        <h4>Connected devices:</h4>
+        <ul id="connections">
+        </ul>
+        <button onclick="startGameOnline()">start online</button>
+      </div>
+
+      <hr>
+
+      <div id="offlineUi">
+        <h3>Offline</h3>
+        <form>
+          <label>How many players?</label>
+          <input type="number">
+        </form>
+        <button onclick="initGame('offline')">start offline</button>
+      </div>
+    </div>
+    </div>
+    <table>
+    </table>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gun/lib/webrtc.js"></script>
+  <script src="anime.min.js"></script>
+  <script src="index.js"></script>
+</html>
